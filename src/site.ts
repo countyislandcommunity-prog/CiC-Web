@@ -3,7 +3,7 @@ export const SITE = {
   name: 'County Island Community',
   short: 'CIC',
   domain: 'countyislandcommunity.com',
-  email: '[CONTACT EMAIL]',
+  email: 'countyislandcommunity@gmail.com',
   phone: '[CONTACT PHONE]',
   mail: '[MAILING ADDRESS]',
   social: [] as { label: string; href: string }[], // [SOCIAL LINKS]

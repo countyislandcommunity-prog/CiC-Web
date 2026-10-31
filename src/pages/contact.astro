@@ -19,12 +19,12 @@ const topics = ['General', 'Health & Safety', 'Tax Reform', 'Water', 'Annexation
       <div class="card">
         <h3>Reach us</h3>
         <ul style="list-style:none;padding:0">
-          <li><strong>Email:</strong> <Ph v={SITE.email} /></li>
+          <li><strong>Email:</strong> <a href={`mailto:${SITE.email}`}>{SITE.email}</a></li>
           <li><strong>Phone:</strong> <Ph v={SITE.phone} /></li>
           <li><strong>Mail:</strong> <Ph v={SITE.mail} /></li>
           <li><strong>Social:</strong> {SITE.social.length ? SITE.social.map((s) => <a href={s.href}>{s.label} </a>) : <Ph v="[SOCIAL LINKS]" />}</li>
         </ul>
-        <p class="muted small">Media inquiries: <Ph v={SITE.email} /></p>
+        <p class="muted small">Media inquiries: <a href={`mailto:${SITE.email}`}>{SITE.email}</a></p>
         <p class="note small">Sharing a bill or receipt? Please remove account numbers first.</p>
       </div>
       <div>
