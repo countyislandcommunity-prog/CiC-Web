@@ -63,33 +63,33 @@ li { margin-bottom: .35em; }
 /* Header */
 .site-header {
   position: sticky; top: 0; z-index: 50;
-  background: rgba(251, 245, 236, .95); backdrop-filter: blur(6px);
-  border-bottom: 1px solid var(--line);
+  background: var(--ink);
 }
-.site-header .container { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 72px; }
-.brand { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--ink); }
+.site-header .container { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 76px; }
+.brand { display: flex; align-items: center; gap: 14px; text-decoration: none; color: #fff; }
+.brand:hover { color: #fff; }
 .brand img { width: 48px; height: 48px; }
-.brand-name { font-family: var(--font-head); font-weight: 600; font-size: 1.2rem; line-height: 1.1; }
-.brand-name small { display: block; font-family: var(--font-body); font-weight: 400; font-size: .78rem; color: var(--ink-soft); letter-spacing: .02em; }
-.nav { display: flex; align-items: center; gap: 4px; }
+.brand-name { font-family: var(--font-head); font-weight: 600; font-size: 1.25rem; line-height: 1.1; }
+.brand-name small { display: block; font-family: var(--font-body); font-weight: 400; font-size: .78rem; color: var(--tan-light); letter-spacing: .02em; }
+.nav { display: flex; align-items: center; gap: 2px; }
 .nav a {
-  text-decoration: none; color: var(--ink); font-weight: 600; font-size: 1rem;
+  text-decoration: none; color: #F4E8DA; font-weight: 600; font-size: 1rem;
   padding: 8px 12px; border-radius: 999px;
 }
-.nav a:hover { background: var(--sand); color: var(--ink); }
-.nav a[aria-current="page"] { color: var(--terracotta); }
-.nav .btn { margin-left: 8px; }
-.nav .btn:hover { background: var(--terracotta-dark); }
+.nav a:hover { background: rgba(255,255,255,.08); color: #fff; }
+.nav a[aria-current="page"] { color: var(--tan); }
+.nav .btn { margin-left: 8px; background: var(--clay); border-color: var(--clay); }
+.nav .btn:hover { background: var(--terracotta); border-color: var(--terracotta); }
 .menu-toggle {
-  display: none; background: none; border: 1px solid var(--line); border-radius: 10px;
-  padding: 8px 12px; font: inherit; font-weight: 600; color: var(--ink); cursor: pointer;
+  display: none; background: none; border: 1px solid rgba(255,255,255,.25); border-radius: 10px;
+  padding: 8px 12px; font: inherit; font-weight: 600; color: #fff; cursor: pointer;
 }
 @media (max-width: 1000px) {
   .menu-toggle { display: block; }
   .nav {
-    display: none; position: absolute; left: 0; right: 0; top: 72px;
-    flex-direction: column; align-items: stretch; background: var(--cream);
-    border-bottom: 1px solid var(--line); padding: 12px 20px 20px;
+    display: none; position: absolute; left: 0; right: 0; top: 76px;
+    flex-direction: column; align-items: stretch; background: var(--ink);
+    border-top: 1px solid rgba(255,255,255,.1); padding: 12px 20px 20px;
   }
   .nav.open { display: flex; }
   .nav a { padding: 12px; border-radius: 10px; }
@@ -109,13 +109,23 @@ li { margin-bottom: .35em; }
 .btn-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
 
 /* Hero */
-.hero { padding: 72px 0 56px; }
-.hero .container { display: grid; grid-template-columns: 1.3fr 1fr; gap: 48px; align-items: center; }
-.hero-art img { width: 100%; max-width: 440px; margin: 0 auto; }
+.hero {
+  padding: 72px 0; color: #fff;
+  background: linear-gradient(135deg, var(--terracotta) 0%, var(--clay) 100%);
+}
+.hero .container { display: grid; grid-template-columns: 1fr 1.6fr; gap: 56px; align-items: center; }
+.hero h1 { color: #fff; }
+.hero .eyebrow { color: var(--tan-light); }
+.hero .lead { color: #fff; }
+.hero p { color: #FCEFE4; }
+.hero-art img { width: 100%; max-width: 360px; margin: 0 auto; filter: drop-shadow(0 12px 30px rgba(59,42,34,.25)); }
+.hero .btn { background: var(--cream); border-color: var(--cream); color: var(--terracotta-dark) !important; }
+.hero .btn:hover { background: #fff; border-color: #fff; }
+.hero .btn.ghost { background: transparent; border-color: #fff; color: #fff !important; }
+.hero .btn.ghost:hover { background: rgba(255,255,255,.12); }
 @media (max-width: 860px) {
-  .hero { padding-top: 40px; }
+  .hero { padding: 40px 0 48px; }
   .hero .container { grid-template-columns: 1fr; gap: 24px; }
-  .hero-art { order: -1; }
   .hero-art img { max-width: 220px; }
 }
 
