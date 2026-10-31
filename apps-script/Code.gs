@@ -7,8 +7,8 @@
  * See docs/forms-setup.md.
  */
 
-// Optional: comma-separated addresses that get an email for each submission. Leave '' for none.
-var NOTIFY_EMAIL = '';
+// Comma-separated addresses that get an email for each submission. Set to '' to turn off.
+var NOTIFY_EMAIL = 'countyislandcommunity@gmail.com';
 
 // Website form name -> sheet tab name.
 var TABS = { join: 'Join', contact: 'Contact', newsletter: 'Newsletter' };
@@ -35,7 +35,11 @@ function doPost(e) {
 
     if (NOTIFY_EMAIL) {
       var body = headers.map(function (h, i) { return h + ': ' + row[i]; }).join('\n');
-      MailApp.sendEmail(NOTIFY_EMAIL, 'New CIC website ' + tabName + ' submission', body);
+      var mail = { to: NOTIFY_EMAIL, subject: 'New CIC website ' + tabName + ' submission', body: body };
+      // Hitting Reply answers the person who filled in the form.
+      var from = first(params.email);
+      if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(from)) mail.replyTo = from;
+      MailApp.sendEmail(mail);
     }
   } finally {
     lock.releaseLock();

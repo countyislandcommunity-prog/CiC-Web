@@ -4,14 +4,14 @@ The Join, Contact and Newsletter forms send each submission to a Google Sheet. E
 
 ## 1. Create the sheet
 
-1. Signed in to the Google account CIC will use, create a new Google Sheet. Name it something like **CIC Website Submissions**.
+1. Signed in as **countyislandcommunity@gmail.com**, create a new Google Sheet. Name it something like **CIC Website Submissions**. Using this account keeps the sheet and the email alerts under CIC's own account.
 2. Share it with any volunteers who should see signups.
 
 ## 2. Add the script
 
 1. In the sheet, open **Extensions → Apps Script**.
 2. Delete everything in `Code.gs`, then paste in the contents of [`apps-script/Code.gs`](../apps-script/Code.gs) from this repo.
-3. Optional: to get an email for each submission, set `NOTIFY_EMAIL` at the top, for example `var NOTIFY_EMAIL = 'you@example.com';`.
+3. Email alerts are already on: each submission is emailed to countyislandcommunity@gmail.com, and hitting **Reply** answers the person who filled in the form. To change or add recipients, edit `NOTIFY_EMAIL` at the top (separate addresses with commas). Set it to `''` to turn alerts off.
 4. Click **Save**.
 
 ## 3. Deploy it
