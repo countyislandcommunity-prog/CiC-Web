@@ -73,6 +73,6 @@ function clean(v) {
 
 function done() {
   return HtmlService.createHtmlOutput(
-    '<p style="font-family:sans-serif">Thanks! Your form was received. <a href="https://countyislandcommunity.com">Back to the site</a></p>'
+    '<p style="font-family:sans-serif">Thanks! Your form was received. <a href="https://www.countyislandcommunity.com">Back to the site</a></p>'
   );
 }
