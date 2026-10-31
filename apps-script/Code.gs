@@ -52,8 +52,16 @@ function doGet() {
   return ContentService.createTextOutput('CIC form handler is running.');
 }
 
+// Run once from the editor: asks for permissions and creates the three tabs.
+function setup() {
+  Object.keys(TABS).forEach(function (k) { getTab(TABS[k]); });
+  if (NOTIFY_EMAIL) MailApp.getRemainingDailyQuota();
+  Logger.log('Ready. Tabs: ' + Object.keys(TABS).map(function (k) { return TABS[k]; }).join(', '));
+}
+
 function getTab(name) {
   var ss = SpreadsheetApp.getActiveSpreadsheet();
+  if (!ss) throw new Error('Open this script from the Google Sheet (Extensions > Apps Script), not from script.google.com.');
   return ss.getSheetByName(name) || ss.insertSheet(name);
 }
 
