@@ -7,8 +7,10 @@ export const SITE = {
   phone: '[CONTACT PHONE]',
   mail: '[MAILING ADDRESS]',
   social: [] as { label: string; href: string }[], // [SOCIAL LINKS]
-  // Where form data is sent, e.g. a Formspree endpoint. Empty = demo mode (no data sent).
-  formHandler: '',
+  // Google Apps Script web app URL that writes form submissions to the CIC Google Sheet
+  // (docs/forms-setup.md). Set PUBLIC_FORM_ENDPOINT in Vercel, or paste the URL in place of ''.
+  // Empty = preview mode: forms show the thank-you message but send nothing.
+  formHandler: (import.meta.env.PUBLIC_FORM_ENDPOINT as string | undefined) || '',
   privacyPolicy: '[PRIVACY POLICY LINK]',
   dues: '[DUES OR FEE INFO]',
   newsletterFrequency: '[NEWSLETTER FREQUENCY]',

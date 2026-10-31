@@ -16,7 +16,7 @@ Open http://localhost:4321.
 - Bracketed placeholders like `[CONTACT EMAIL]` show up highlighted in yellow on the site. Search the repo for `[` to find them all.
 - Contact info, meeting details, dues and the form handler are in `src/site.ts`.
 - Island names and descriptions are in `src/pages/islands.astro`.
-- **Forms:** set `formHandler` in `src/site.ts` to a form endpoint (for example a Formspree URL). Until then, forms validate and show the thank-you message but send nothing.
+- **Forms:** submissions go to a Google Sheet. Follow [docs/forms-setup.md](docs/forms-setup.md). Until that is done, forms validate and show the thank-you message but send nothing.
 - Replace the two sample posts in `src/content/news/`.
 
 ## Add a news post
@@ -42,4 +42,4 @@ Post body...
 
 ## Deploy
 
-Pushing to `main` builds and deploys to GitHub Pages through `.github/workflows/deploy.yml`. One-time setup: in the repo, go to Settings → Pages and set Source to **GitHub Actions**. To use the custom domain, add it under Settings → Pages and point the domain's DNS at GitHub Pages.
+Hosted on Vercel (project `cic-web`). Every push to `main` deploys to production; other branches get preview URLs. Deployment Protection is on, so only the Vercel team can view the site until it is turned off under Settings → Deployment Protection. Add the custom domain under Settings → Domains.

@@ -1,6 +1,6 @@
 ---
-// Posts to SITE.formHandler (e.g. a Formspree endpoint). With no handler set, the
-// form validates and shows the success message without sending anything.
+// Posts to SITE.formHandler: the Google Apps Script web app URL (see docs/forms-setup.md).
+// With no handler set, the form validates and shows the success message without sending anything.
 import { SITE } from '../site';
 
 interface Props { name: string; submit: string; success: string }
@@ -8,6 +8,9 @@ const { name, submit, success } = Astro.props;
 ---
 <form class="cic-form" method="POST" action={SITE.formHandler || undefined} data-form={name} data-success={success} data-handler={SITE.formHandler}>
   <input type="hidden" name="_form" value={name} />
+  <div class="hp" aria-hidden="true">
+    <label>Leave this empty <input type="text" name="website" tabindex="-1" autocomplete="off" /></label>
+  </div>
   <slot />
   <p class="form-error" role="alert" hidden></p>
   <div><button class="btn" type="submit">{submit}</button></div>
@@ -19,15 +22,20 @@ const { name, submit, success } = Astro.props;
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       const err = form.querySelector<HTMLElement>('.form-error')!;
+      const btn = form.querySelector<HTMLButtonElement>('button[type=submit]')!;
       err.hidden = true;
       const handler = form.dataset.handler;
       if (handler) {
+        btn.disabled = true;
         try {
-          const res = await fetch(handler, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } });
-          if (!res.ok) throw new Error(String(res.status));
+          // Apps Script doesn't send CORS headers, so post as a simple form request
+          // and treat any network-level success as delivered.
+          const body = new URLSearchParams(new FormData(form) as unknown as Record<string, string>);
+          await fetch(handler, { method: 'POST', mode: 'no-cors', body });
         } catch {
           err.textContent = 'Sorry, something went wrong. Please try again or email us.';
           err.hidden = false;
+          btn.disabled = false;
           return;
         }
       }
