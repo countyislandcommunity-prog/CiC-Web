@@ -1,0 +1,33 @@
+---
+import Base from './Base.astro';
+import { ISSUES } from '../site';
+
+interface Props { title: string; heading: string; lead: string; description?: string }
+const { title, heading, lead, description } = Astro.props;
+const others = ISSUES.filter((i) => i.title !== title);
+---
+<Base title={title} description={description ?? lead}>
+  <section class="page-head">
+    <div class="container narrow">
+      <p class="eyebrow"><a href="/issues/">Issues</a> · {title}</p>
+      <h1>{heading}</h1>
+      <p class="lead">{lead}</p>
+    </div>
+  </section>
+  <section class="section" style="padding-top:8px">
+    <div class="container narrow prose">
+      <slot />
+      <div class="callout" style="margin-top:48px">
+        <div>
+          <h3>Stay informed</h3>
+          <p>Join CIC to get updates on this issue.</p>
+        </div>
+        <a class="btn" href="/get-involved/">Join CIC</a>
+      </div>
+      <h3>Other issues</h3>
+      <ul class="tags">
+        {others.map((o) => <li><a class="tag" href={`/issues/${o.slug}/`}>{o.title}</a></li>)}
+      </ul>
+    </div>
+  </section>
+</Base>

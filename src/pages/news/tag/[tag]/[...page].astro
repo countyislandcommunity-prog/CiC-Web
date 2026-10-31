@@ -1,0 +1,16 @@
+---
+import type { GetStaticPaths } from 'astro';
+import { getCollection } from 'astro:content';
+import NewsList from '../../../../components/NewsList.astro';
+import { TAGS, tagSlug } from '../../../../site';
+
+export const getStaticPaths = (async ({ paginate }) => {
+  const posts = (await getCollection('news')).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+  return TAGS.flatMap((t) =>
+    paginate(posts.filter((p) => p.data.tags.includes(t)), { params: { tag: tagSlug(t) }, props: { tagName: t }, pageSize: 10 }),
+  );
+}) satisfies GetStaticPaths;
+
+const { page, tagName } = Astro.props;
+---
+<NewsList page={page} tag={tagName} />

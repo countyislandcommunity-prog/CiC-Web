@@ -1,0 +1,30 @@
+---
+import Base from '../../layouts/Base.astro';
+import { ISSUES } from '../../site';
+
+const swatches = ['var(--terracotta)', 'var(--clay)', 'var(--sage)', 'var(--tan)'];
+---
+<Base title="Issues" description="Fire and EMS coverage, city sales tax, water, and staying a county island.">
+  <section class="page-head">
+    <div class="container">
+      <p class="eyebrow">Issues</p>
+      <h1>What we're working on</h1>
+      <p class="lead">We focus on four topics that affect every household in the islands.</p>
+    </div>
+  </section>
+  <section class="section" style="padding-top:16px">
+    <div class="container">
+      <div class="grid two">
+        {ISSUES.map((issue, i) => (
+          <a class="card" href={`/issues/${issue.slug}/`}>
+            <div class="swatch" style={`background:${swatches[i]}`} />
+            <h3>{issue.title}</h3>
+            <p class="muted">{issue.blurb}</p>
+            <span class="more">Read more →</span>
+          </a>
+        ))}
+      </div>
+      <p style="margin-top:32px">Have another concern? <a href="/contact/">Tell us</a>.</p>
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,13 @@
+---
+import type { GetStaticPaths } from 'astro';
+import { getCollection } from 'astro:content';
+import NewsList from '../../components/NewsList.astro';
+
+export const getStaticPaths = (async ({ paginate }) => {
+  const posts = (await getCollection('news')).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+  return paginate(posts, { pageSize: 10 });
+}) satisfies GetStaticPaths;
+
+const { page } = Astro.props;
+---
+<NewsList page={page} />

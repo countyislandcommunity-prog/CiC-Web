@@ -1,0 +1,33 @@
+---
+import Form from './Form.astro';
+import Ph from './Ph.astro';
+import { SITE, ISLANDS } from '../site';
+---
+<section class="section alt" id="newsletter">
+  <div class="container narrow">
+    <p class="eyebrow">Newsletter</p>
+    <h2>Get island news in your inbox</h2>
+    <p class="muted">Sent <Ph v={SITE.newsletterFrequency} />. No spam.</p>
+    <Form name="newsletter" submit="Subscribe" success="You're subscribed. Thanks for staying connected!">
+      <div class="row-2">
+        <div class="field">
+          <label for="nl-email">Email <span class="req">*</span></label>
+          <input id="nl-email" name="email" type="email" required autocomplete="email" />
+        </div>
+        <div class="field">
+          <label for="nl-first">First name</label>
+          <input id="nl-first" name="first_name" type="text" autocomplete="given-name" />
+        </div>
+      </div>
+      <div class="field">
+        <label for="nl-island">Your island</label>
+        <select id="nl-island" name="island">
+          <option value="">Choose one</option>
+          {ISLANDS.map((i) => <option>{i}</option>)}
+          <option>Not sure</option>
+        </select>
+      </div>
+      <label class="check"><input type="checkbox" name="consent" required /> <span>I agree to receive CIC updates. I can unsubscribe anytime. <span class="req">*</span></span></label>
+    </Form>
+  </div>
+</section>

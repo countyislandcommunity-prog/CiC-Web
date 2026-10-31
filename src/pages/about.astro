@@ -1,0 +1,38 @@
+---
+import Base from '../layouts/Base.astro';
+import Ph from '../components/Ph.astro';
+---
+<Base title="About" description="County Island Community is a volunteer group of residents from the 13 county islands in the Peoria MPA.">
+  <section class="page-head">
+    <div class="container narrow">
+      <p class="eyebrow">About CIC</p>
+      <h1>Who we are</h1>
+      <p class="lead">County Island Community (CIC) is a loosely organized, representative group of residents from the 13 county islands in the Peoria MPA.</p>
+    </div>
+  </section>
+  <section class="section" style="padding-top:16px">
+    <div class="container narrow prose">
+      <p>We live inside Peoria's planning area, but we are not part of the city. No city council speaks for us, and no local body is focused on our needs.</p>
+      <p>CIC exists to fill that gap. Neighbors speak up together so every island is heard.</p>
+      <p>CIC is <Ph v="[ENTITY STATUS]" />.</p>
+
+      <h2>Our area</h2>
+      <p>There are 13 county islands, each with its own geography. Together they hold about <Ph v="[HOUSEHOLD COUNT]" /> households. <a href="/islands/">See the islands</a>.</p>
+      <p>Our homes are in unincorporated Maricopa County. We do not vote in Peoria city elections.</p>
+
+      <h2>How we work</h2>
+      <div class="grid two">
+        <div class="card"><h3>Volunteer-run</h3><p class="muted">We are run by volunteers who live here.</p></div>
+        <div class="card"><h3>Listen first</h3><p class="muted">We listen first, then act.</p></div>
+        <div class="card"><h3>Nonpartisan</h3><p class="muted">Everyone in the islands is welcome.</p></div>
+        <div class="card"><h3>Plain language</h3><p class="muted">We share what we learn in plain language.</p></div>
+      </div>
+
+      <h2>Representation</h2>
+      <p>CIC aims to include residents from every one of the 13 islands.</p>
+      <p>Volunteer coordinators: <Ph v="[BOARD MEMBER NAMES AND ROLES]" /></p>
+
+      <div class="btn-row"><a class="btn" href="/get-involved/">Join CIC</a><a class="btn ghost" href="/contact/">Contact us</a></div>
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,50 @@
+---
+import Base from '../layouts/Base.astro';
+import Ph from '../components/Ph.astro';
+
+// Fill in from the fire district impact statement [VERIFY].
+const islands = Array.from({ length: 13 }, (_, i) => ({
+  n: i + 1,
+  name: `[ISLAND ${i + 1} NAME/BOUNDARIES]`,
+  desc: '[Short description: streets, landmarks, approx. households]',
+}));
+---
+<Base title="The Islands" description="The 13 unincorporated county islands in the Peoria Metro Planning Area.">
+  <section class="page-head">
+    <div class="container">
+      <p class="eyebrow">The Islands</p>
+      <h1>13 islands, one community</h1>
+      <p class="lead">The Peoria MPA includes 13 unincorporated county islands. Each has its own shape and character.</p>
+      <p>All 13 were mapped in the recent fire district impact statement. <Ph v="[IMPACT STATEMENT LINK]" /></p>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:16px">
+    <div class="container">
+      <figure class="map-frame" style="margin:0 0 40px">
+        <img src="/images/logo.png" alt="Island outlines (placeholder until the full map is added)" width="420" height="420" />
+        <figcaption class="muted small">
+          <Ph v="[MAP IMAGE]" /> Map: the 13 county islands in the Peoria MPA. Source: <Ph v="[MAP SOURCE]" />
+        </figcaption>
+      </figure>
+
+      <div class="grid three">
+        {islands.map((isl) => (
+          <div class="card island-card" id={`island-${isl.n}`}>
+            <div class="num">{isl.n}</div>
+            <h3><Ph v={isl.name} /></h3>
+            <p class="muted small"><Ph v={isl.desc} /></p>
+          </div>
+        ))}
+      </div>
+
+      <div class="callout" style="margin-top:40px">
+        <div>
+          <h3>Not sure which island you live in?</h3>
+          <p>Send us your cross streets and we will help.</p>
+        </div>
+        <a class="btn" href="/contact/">Contact us</a>
+      </div>
+    </div>
+  </section>
+</Base>

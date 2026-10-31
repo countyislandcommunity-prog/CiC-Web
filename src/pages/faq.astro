@@ -1,0 +1,36 @@
+---
+import Base from '../layouts/Base.astro';
+
+const faqs: [string, string][] = [
+  ['What is a county island?', 'It is an unincorporated area surrounded by a city. Our homes are in Maricopa County, not in Peoria. That means no city government represents us.'],
+  ['How many islands are there?', 'Thirteen in the Peoria MPA. See <a href="/islands/">The Islands</a>.'],
+  ['Who can join CIC?', 'Any resident of the 13 county islands in the Peoria MPA. <span class="ph">[VERIFY eligibility rules]</span>'],
+  ['Does it cost anything?', '<span class="ph">[DUES OR FEE INFO]</span>'],
+  ['Is CIC part of a political party?', 'No. We are nonpartisan.'],
+  ["What is CIC's legal status?", 'CIC is <span class="ph">[ENTITY STATUS]</span>.'],
+  ['Do I have fire coverage right now?', 'It depends on your home. <span class="ph">[LINK OR INSTRUCTIONS]</span>'],
+  ['Why do I see city tax on my bills?', "That's one of the questions residents are asking. See <a href=\"/issues/tax-reform/\">Tax Reform</a>."],
+  ['Can CIC give me legal or tax advice?', 'No. Please talk to a qualified professional.'],
+  ['Is anyone forcing us to annex?', '<span class="ph">[VERIFY current status]</span> We will share news as we learn it.'],
+  ['How do I stay updated?', '<a href="/get-involved/">Join CIC</a> to get our updates.'],
+];
+---
+<Base title="FAQ" description="Common questions about county islands and County Island Community.">
+  <section class="page-head">
+    <div class="container narrow">
+      <p class="eyebrow">FAQ</p>
+      <h1>Frequently asked questions</h1>
+    </div>
+  </section>
+  <section class="section" style="padding-top:8px">
+    <div class="container narrow">
+      {faqs.map(([q, a]) => (
+        <details>
+          <summary>{q}</summary>
+          <div set:html={a} />
+        </details>
+      ))}
+      <p style="margin-top:32px">Still have a question? <a href="/contact/">Contact us</a>.</p>
+    </div>
+  </section>
+</Base>

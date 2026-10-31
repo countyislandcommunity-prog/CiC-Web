@@ -1,0 +1,23 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { tagSlug } from '../site';
+import Ph from './Ph.astro';
+
+interface Props { post: CollectionEntry<'news'> }
+const { post } = Astro.props;
+const { title, date, summary, image, tags, author } = post.data;
+const href = `/news/post/${post.id}/`;
+---
+<article class="card post-item">
+  <a class="thumb" href={href} tabindex="-1" aria-hidden="true">
+    {image ? <img class="cover" src={image} alt="" /> : <img class="mark" src="/images/logo.png" alt="" />}
+  </a>
+  <div>
+    <p class="meta"><time datetime={date.toISOString()}>{date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' })}</time> · {author}</p>
+    <h3><a href={href}><Ph v={title} /></a></h3>
+    <p class="muted"><Ph v={summary} /></p>
+    <ul class="tags">
+      {tags.map((t) => <li><a class="tag" href={`/news/tag/${tagSlug(t)}/`}>{t}</a></li>)}
+    </ul>
+  </div>
+</article>

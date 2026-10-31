@@ -1,0 +1,91 @@
+---
+import Base from '../layouts/Base.astro';
+import Ph from '../components/Ph.astro';
+import PostItem from '../components/PostItem.astro';
+import { SITE, ISSUES } from '../site';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('news')).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf()).slice(0, 3);
+const swatches = ['var(--terracotta)', 'var(--clay)', 'var(--sage)', 'var(--tan)'];
+---
+<Base>
+  <section class="hero">
+    <div class="container">
+      <div>
+        <p class="eyebrow">Peoria MPA · Maricopa County, Arizona</p>
+        <h1>Welcome to County Island Community</h1>
+        <p class="lead">We are neighbors in the 13 unincorporated county islands within the Peoria Metro Planning Area.</p>
+        <p>Our islands have no local government looking out for them. We are not part of the city, and we are a small corner of a very large county. So we look out for each other.</p>
+        <p>We want to keep our community safe, secure, and connected. And we want to stay a county island.</p>
+        <div class="btn-row">
+          <a class="btn" href="/get-involved/">Join Us</a>
+          <a class="btn ghost" href="/islands/">See the Islands</a>
+        </div>
+      </div>
+      <div class="hero-art">
+        <img src="/images/logo.png" alt="Outlines of the county islands arranged in a circle" width="440" height="440" />
+      </div>
+    </div>
+  </section>
+
+  <section class="section alt">
+    <div class="container">
+      <p class="eyebrow">Our mission</p>
+      <h2>To promote safety, security, and general community within the county islands.</h2>
+      <p class="muted" style="margin-bottom:28px">What we care about:</p>
+      <div class="grid four">
+        {ISSUES.map((issue, i) => (
+          <a class="card" href={`/issues/${issue.slug}/`}>
+            <div class="swatch" style={`background:${swatches[i]}`} />
+            <h3>{issue.title}</h3>
+            <p class="muted">{issue.blurb}</p>
+            <span class="more">Learn more →</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container grid two">
+      <div class="card meeting">
+        <p class="eyebrow">Next meeting</p>
+        <h3><Ph v={SITE.meeting.date} /></h3>
+        <p><Ph v={SITE.meeting.time} />, at <Ph v={SITE.meeting.location} />.</p>
+        <p class="muted small">Every island resident is welcome. Bring a neighbor.</p>
+      </div>
+      <div class="card">
+        <p class="eyebrow">13 islands, one community</p>
+        <h3>Not sure which island you live in?</h3>
+        <p class="muted">Each island has its own shape and character. See all 13, or send us your cross streets and we will help.</p>
+        <div class="btn-row" style="margin-top:auto">
+          <a class="btn ghost" href="/islands/">See the Islands</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section alt">
+    <div class="container">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap">
+        <h2>Latest news</h2>
+        <a href="/news/">All news →</a>
+      </div>
+      <div class="post-list" style="margin-top:16px">
+        {posts.map((p) => <PostItem post={p} />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="callout">
+        <div>
+          <h2>Every neighbor makes our voice stronger.</h2>
+          <p>Join CIC to get updates and help look out for the islands.</p>
+        </div>
+        <a class="btn" href="/get-involved/">Join CIC</a>
+      </div>
+    </div>
+  </section>
+</Base>

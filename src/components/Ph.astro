@@ -1,0 +1,8 @@
+---
+// Renders a value, highlighting it if it is still a [PLACEHOLDER].
+interface Props { v?: string }
+const { v } = Astro.props;
+const slot = v ?? (await Astro.slots.render('default'));
+const isPh = slot.trim().startsWith('[');
+---
+{isPh ? <span class="ph" set:html={slot} /> : <Fragment set:html={slot} />}

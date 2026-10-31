@@ -1,0 +1,60 @@
+---
+import Base from '../layouts/Base.astro';
+import Ph from '../components/Ph.astro';
+import Form from '../components/Form.astro';
+import { SITE } from '../site';
+
+const topics = ['General', 'Health & Safety', 'Tax Reform', 'Water', 'Annexation', 'Media'];
+---
+<Base title="Contact" description="Get in touch with County Island Community.">
+  <section class="page-head">
+    <div class="container">
+      <p class="eyebrow">Contact</p>
+      <h1>Get in touch</h1>
+      <p class="lead">Questions, stories, or not sure which island you live in? We'd like to hear from you.</p>
+    </div>
+  </section>
+  <section class="section" style="padding-top:8px">
+    <div class="container grid two" style="align-items:start">
+      <div class="card">
+        <h3>Reach us</h3>
+        <ul style="list-style:none;padding:0">
+          <li><strong>Email:</strong> <Ph v={SITE.email} /></li>
+          <li><strong>Phone:</strong> <Ph v={SITE.phone} /></li>
+          <li><strong>Mail:</strong> <Ph v={SITE.mail} /></li>
+          <li><strong>Social:</strong> {SITE.social.length ? SITE.social.map((s) => <a href={s.href}>{s.label} </a>) : <Ph v="[SOCIAL LINKS]" />}</li>
+        </ul>
+        <p class="muted small">Media inquiries: <Ph v={SITE.email} /></p>
+        <p class="note small">Sharing a bill or receipt? Please remove account numbers first.</p>
+      </div>
+      <div>
+        <Form name="contact" submit="Send message" success="Thanks! Your message is on its way. We'll get back to you soon.">
+          <div class="field">
+            <label for="c-name">Name <span class="req">*</span></label>
+            <input id="c-name" name="name" type="text" required autocomplete="name" />
+          </div>
+          <div class="field">
+            <label for="c-email">Email <span class="req">*</span></label>
+            <input id="c-email" name="email" type="email" required autocomplete="email" />
+          </div>
+          <div class="field">
+            <label for="c-topic">Topic</label>
+            <select id="c-topic" name="topic">
+              {topics.map((t) => <option>{t}</option>)}
+            </select>
+          </div>
+          <div class="field">
+            <label for="c-msg">Message <span class="req">*</span></label>
+            <textarea id="c-msg" name="message" required></textarea>
+          </div>
+        </Form>
+      </div>
+    </div>
+  </section>
+  <script>
+    // Preselect topic from ?topic= links on issue pages.
+    const t = new URLSearchParams(location.search).get('topic');
+    const sel = document.getElementById('c-topic') as HTMLSelectElement | null;
+    if (t && sel && [...sel.options].some((o) => o.value === t)) sel.value = t;
+  </script>
+</Base>

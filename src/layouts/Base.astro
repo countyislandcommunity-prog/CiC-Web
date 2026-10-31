@@ -1,0 +1,91 @@
+---
+import '../styles/global.css';
+import { SITE, NAV } from '../site';
+import Ph from '../components/Ph.astro';
+
+interface Props { title?: string; description?: string }
+const { title, description = 'Neighbors in the 13 unincorporated county islands of the Peoria MPA, Arizona, looking out for each other.' } = Astro.props;
+const fullTitle = title ? `${title} | ${SITE.name}` : SITE.name;
+const path = Astro.url.pathname;
+const isCurrent = (href: string) => (href === '/' ? path === '/' : path.startsWith(href));
+const year = new Date().getFullYear();
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/png" href="/images/logo.png" />
+    <link rel="canonical" href={new URL(path, Astro.site)} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={new URL('/images/logo.png', Astro.site)} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <header class="site-header">
+      <div class="container">
+        <a class="brand" href="/">
+          <img src="/images/logo.png" alt="" width="48" height="48" />
+          <span class="brand-name">County Island Community<small>13 islands · Peoria MPA, Arizona</small></span>
+        </a>
+        <button class="menu-toggle" aria-expanded="false" aria-controls="site-nav">Menu</button>
+        <nav class="nav" id="site-nav" aria-label="Main">
+          {NAV.map((n) => <a href={n.href} aria-current={isCurrent(n.href) ? 'page' : undefined}>{n.label}</a>)}
+          <a class="btn" href="/get-involved/">Join CIC</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <div class="cols">
+          <div>
+            <h4>County Island Community</h4>
+            <p class="small">Promoting safety, security, and general community within the 13 county islands of the Peoria MPA. Volunteer-run and nonpartisan.</p>
+          </div>
+          <div>
+            <h4>Explore</h4>
+            <ul class="small">
+              <li><a href="/islands/">The Islands</a></li>
+              <li><a href="/issues/">Issues</a></li>
+              <li><a href="/news/">News</a></li>
+              <li><a href="/get-involved/">Get Involved</a></li>
+              <li><a href="/faq/">FAQ</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Contact</h4>
+            <ul class="small">
+              <li>Email: <Ph v={SITE.email} /></li>
+              <li>Phone: <Ph v={SITE.phone} /></li>
+              <li>Mail: <Ph v={SITE.mail} /></li>
+              <li><a href="/contact/">Contact form</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="bottom">
+          © {year} County Island Community · {SITE.domain} · CIC does not give tax or legal advice.
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      const btn = document.querySelector('.menu-toggle');
+      const nav = document.getElementById('site-nav');
+      btn?.addEventListener('click', () => {
+        const open = nav?.classList.toggle('open');
+        btn.setAttribute('aria-expanded', String(!!open));
+      });
+    </script>
+  </body>
+</html>

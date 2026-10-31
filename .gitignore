@@ -1,0 +1,6 @@
+node_modules/
+dist/
+.astro/
+.env
+.DS_Store
+439d28e86e79513d6db0e3f23ac7e4a01f28a3ae3c00cdf455a5c739620e5ec4.png

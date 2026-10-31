@@ -1,0 +1,41 @@
+---
+// Posts to SITE.formHandler (e.g. a Formspree endpoint). With no handler set, the
+// form validates and shows the success message without sending anything.
+import { SITE } from '../site';
+
+interface Props { name: string; submit: string; success: string }
+const { name, submit, success } = Astro.props;
+---
+<form class="cic-form" method="POST" action={SITE.formHandler || undefined} data-form={name} data-success={success} data-handler={SITE.formHandler}>
+  <input type="hidden" name="_form" value={name} />
+  <slot />
+  <p class="form-error" role="alert" hidden></p>
+  <div><button class="btn" type="submit">{submit}</button></div>
+  {!SITE.formHandler && <p class="form-demo">Preview mode: no form handler is set yet, so nothing is sent.</p>}
+</form>
+
+<script>
+  document.querySelectorAll<HTMLFormElement>('form[data-form]').forEach((form) => {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const err = form.querySelector<HTMLElement>('.form-error')!;
+      err.hidden = true;
+      const handler = form.dataset.handler;
+      if (handler) {
+        try {
+          const res = await fetch(handler, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } });
+          if (!res.ok) throw new Error(String(res.status));
+        } catch {
+          err.textContent = 'Sorry, something went wrong. Please try again or email us.';
+          err.hidden = false;
+          return;
+        }
+      }
+      const done = document.createElement('div');
+      done.className = 'form-success';
+      done.setAttribute('role', 'status');
+      done.textContent = form.dataset.success || 'Thanks!';
+      form.replaceWith(done);
+    });
+  });
+</script>

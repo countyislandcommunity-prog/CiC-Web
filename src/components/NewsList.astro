@@ -1,0 +1,39 @@
+---
+import type { Page } from 'astro';
+import type { CollectionEntry } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import PostItem from './PostItem.astro';
+import NewsletterForm from './NewsletterForm.astro';
+import { TAGS, tagSlug } from '../site';
+
+interface Props { page: Page<CollectionEntry<'news'>>; tag?: string }
+const { page, tag } = Astro.props;
+---
+<Base title={tag ? `News: ${tag}` : 'News'} description="Updates from around the 13 islands: meetings, issue news, and neighbor stories.">
+  <section class="page-head">
+    <div class="container">
+      <p class="eyebrow">News</p>
+      <h1>{tag ? tag : 'News and updates'}</h1>
+      <p class="lead">Updates from around the 13 islands: meetings, issue news, and neighbor stories.</p>
+      <ul class="tags" aria-label="Filter by topic" style="margin-top:16px">
+        <li><a class:list={['tag', { active: !tag }]} href="/news/">All</a></li>
+        {TAGS.map((t) => <li><a class:list={['tag', { active: t === tag }]} href={`/news/tag/${tagSlug(t)}/`}>{t}</a></li>)}
+      </ul>
+    </div>
+  </section>
+  <section class="section" style="padding-top:16px">
+    <div class="container">
+      {page.data.length === 0 ? <p class="muted">No posts yet in this topic.</p> : (
+        <div class="post-list">{page.data.map((p) => <PostItem post={p} />)}</div>
+      )}
+      {(page.url.prev || page.url.next) && (
+        <nav class="pager" aria-label="Pagination">
+          {page.url.prev ? <a class="btn ghost" href={page.url.prev}>← Newer</a> : <span />}
+          <span class="muted small">Page {page.currentPage} of {page.lastPage}</span>
+          {page.url.next ? <a class="btn ghost" href={page.url.next}>Older →</a> : <span />}
+        </nav>
+      )}
+    </div>
+  </section>
+  <NewsletterForm />
+</Base>

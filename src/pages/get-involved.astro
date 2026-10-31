@@ -1,0 +1,78 @@
+---
+import Base from '../layouts/Base.astro';
+import Ph from '../components/Ph.astro';
+import Form from '../components/Form.astro';
+import { SITE, ISLANDS } from '../site';
+
+const interests = ['Health & Safety', 'Tax Reform', 'Water Issues', 'Staying a County Island', 'Volunteering', 'Events'];
+---
+<Base title="Get Involved" description="Join County Island Community. Every neighbor makes our voice stronger.">
+  <section class="page-head">
+    <div class="container narrow">
+      <p class="eyebrow">Get Involved</p>
+      <h1>Join CIC</h1>
+      <p class="lead">Every neighbor makes our voice stronger. Joining is <Ph v={SITE.dues} />.</p>
+    </div>
+  </section>
+
+  <section class="section" style="padding-top:8px">
+    <div class="container narrow">
+      <h2>Ways to help</h2>
+      <div class="grid two" style="margin-bottom:48px">
+        <div class="card"><h3>Come to a meeting</h3><p class="muted"><Ph v={SITE.meeting.date} />, <Ph v={SITE.meeting.location} />.</p></div>
+        <div class="card"><h3>Talk to your neighbors</h3><p class="muted">Share this site and what you learn.</p></div>
+        <div class="card"><h3>Share your story</h3><p class="muted">Send us your bills, stories, and concerns.</p></div>
+        <div class="card"><h3>Volunteer</h3><p class="muted">Help out on a committee.</p></div>
+      </div>
+
+      <h2 id="join">Sign up</h2>
+      <Form name="join" submit="Join CIC" success="Thanks for joining! We'll be in touch soon.">
+        <div class="field">
+          <label for="j-name">Full name <span class="req">*</span></label>
+          <input id="j-name" name="full_name" type="text" required autocomplete="name" />
+        </div>
+        <div class="row-2">
+          <div class="field">
+            <label for="j-email">Email <span class="req">*</span></label>
+            <input id="j-email" name="email" type="email" required autocomplete="email" />
+          </div>
+          <div class="field">
+            <label for="j-phone">Phone</label>
+            <input id="j-phone" name="phone" type="tel" autocomplete="tel" />
+          </div>
+        </div>
+        <div class="field">
+          <label for="j-street">Street address <span class="req">*</span></label>
+          <input id="j-street" name="street" type="text" required autocomplete="street-address" aria-describedby="j-street-help" />
+          <span id="j-street-help" class="muted small">Used only to confirm you live in the islands.</span>
+        </div>
+        <div class="row-2">
+          <div class="field">
+            <label for="j-city">City / ZIP <span class="req">*</span></label>
+            <input id="j-city" name="city_zip" type="text" required />
+          </div>
+          <div class="field">
+            <label for="j-island">Your island</label>
+            <select id="j-island" name="island">
+              <option value="">Choose one</option>
+              {ISLANDS.map((i) => <option>{i}</option>)}
+              <option>Not sure</option>
+            </select>
+          </div>
+        </div>
+        <fieldset>
+          <legend>Interests</legend>
+          <div class="checks">
+            {interests.map((i) => <label class="check"><input type="checkbox" name="interests" value={i} /> {i}</label>)}
+          </div>
+        </fieldset>
+        <div class="field">
+          <label for="j-comments">Comments</label>
+          <textarea id="j-comments" name="comments"></textarea>
+        </div>
+        <label class="check"><input type="checkbox" name="consent" required /> <span>I agree to receive CIC updates. I can unsubscribe anytime. <span class="req">*</span></span></label>
+        <p class="muted small" style="margin:0">We never sell or share your information. <Ph v={SITE.privacyPolicy} /></p>
+      </Form>
+    </div>
+  </section>
+</Base>
