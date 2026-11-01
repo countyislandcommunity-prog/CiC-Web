@@ -10,7 +10,7 @@ export const SITE = {
   // Google Apps Script web app that writes form submissions to the CIC Google Sheet
   // (docs/forms-setup.md). PUBLIC_FORM_ENDPOINT in Vercel overrides it.
   formHandler: (import.meta.env.PUBLIC_FORM_ENDPOINT as string | undefined) ||
-    'https://script.google.com/macros/s/AKfycbzp_WtZCvjI9Dpd2d4WLQcBKIIQF10Wt6D50RuKGr14pLNpQw2Qc8XNVpfulEmOntSn/exec',
+    'https://script.google.com/macros/s/AKfycbx4NCbWMVwUaqocscKluJfL7McfHcN2g1CtmgHu7Y_rhaq59OZJqPejgkdEL3Q0bzvR/exec',
   privacyPolicy: '[PRIVACY POLICY LINK]',
   dues: '[DUES OR FEE INFO]',
   newsletterFrequency: '[NEWSLETTER FREQUENCY]',
