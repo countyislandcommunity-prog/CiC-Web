@@ -31,11 +31,12 @@ export const NAV = [
   { label: 'Contact', href: '/contact/' },
 ];
 
+// tag: the news tag whose posts are listed on the issue page.
 export const ISSUES = [
-  { slug: 'health-safety', title: 'Health & Safety', blurb: 'Reliable fire and EMS coverage for every home.' },
-  { slug: 'tax-reform', title: 'Tax Reform', blurb: 'Clear answers about city sales tax charged to island residents.' },
-  { slug: 'water', title: 'Water', blurb: 'Dependable, fair water service.' },
-  { slug: 'staying-a-county-island', title: 'Staying a County Island', blurb: 'Our choice, our voice.' },
+  { slug: 'health-safety', title: 'Health & Safety', tag: 'Health & Safety', blurb: 'Reliable fire and EMS coverage for every home.' },
+  { slug: 'tax-reform', title: 'Tax Reform', tag: 'Tax Reform', blurb: 'Clear answers about city sales tax charged to island residents.' },
+  { slug: 'water', title: 'Water', tag: 'Water', blurb: 'Dependable, fair water service.' },
+  { slug: 'staying-a-county-island', title: 'Staying a County Island', tag: 'Annexation', blurb: 'Our choice, our voice.' },
 ];
 
 export const TAGS = ['Health & Safety', 'Tax Reform', 'Water', 'Annexation', 'Events', 'Community'];

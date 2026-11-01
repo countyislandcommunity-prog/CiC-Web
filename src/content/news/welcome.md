@@ -1,6 +1,6 @@
 ---
 title: Welcome to the new CIC website
-date: 2026-10-31
+date: 2026-10-30
 author: CIC Volunteers
 summary: A home for news, meetings, and resources for all 13 county islands in the Peoria MPA.
 tags: [Community]

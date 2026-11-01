@@ -1,9 +1,9 @@
 ---
 import Issue from '../../layouts/Issue.astro';
-import Ph from '../../components/Ph.astro';
+import { SITE } from '../../site';
 ---
 <Issue title="Tax Reform" heading="City sales tax in the county islands" lead="Many island residents see Peoria city sales tax on bills and online orders.">
-  <p><Ph v="[TPT RATE]" /></p>
+  <p>Taxable online purchases in unincorporated Maricopa County generally carry a combined state and county rate of 6.3%. Inside incorporated Peoria, the city's 1.8% retail tax brings that to 8.1%. Some island residents are seeing the higher rate.</p>
   <p>But island homes are not in the city. We get no city services and no city vote.</p>
 
   <h2>Questions residents are raising</h2>
@@ -22,6 +22,6 @@ import Ph from '../../components/Ph.astro';
   </ul>
 
   <h2>Share your example</h2>
-  <p>Seen a city tax on your bill? <a href="/contact/?topic=Tax%20Reform">Send it to us</a>. Please remove account numbers first.</p>
+  <p>Seen a city tax on your bill? Email a copy to <a href={`mailto:${SITE.email}?subject=Tax%20charge%20example`}>{SITE.email}</a>, or <a href="/contact/?topic=Tax%20Reform">send us a message</a>. Please remove card and account numbers first.</p>
   <p class="note">CIC does not give tax or legal advice.</p>
 </Issue>

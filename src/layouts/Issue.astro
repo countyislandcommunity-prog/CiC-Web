@@ -1,10 +1,18 @@
 ---
+import { getCollection } from 'astro:content';
 import Base from './Base.astro';
-import { ISSUES } from '../site';
+import PostItem from '../components/PostItem.astro';
+import { ISSUES, tagSlug } from '../site';
 
 interface Props { title: string; heading: string; lead: string; description?: string }
 const { title, heading, lead, description } = Astro.props;
+const issue = ISSUES.find((i) => i.title === title);
 const others = ISSUES.filter((i) => i.title !== title);
+const posts = issue
+  ? (await getCollection('news', (p) => p.data.tags.includes(issue.tag)))
+      .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+      .slice(0, 5)
+  : [];
 ---
 <Base title={title} description={description ?? lead}>
   <section class="page-head">
@@ -17,6 +25,17 @@ const others = ISSUES.filter((i) => i.title !== title);
   <section class="section" style="padding-top:8px">
     <div class="container narrow prose">
       <slot />
+    </div>
+    {issue && posts.length > 0 && (
+      <div class="container narrow" style="margin-top:48px">
+        <h2>Latest on this issue</h2>
+        <div class="post-list" style="margin-top:16px">
+          {posts.map((p) => <PostItem post={p} />)}
+        </div>
+        <p style="margin-top:16px"><a href={`/news/tag/${tagSlug(issue.tag)}/`}>All {issue.tag} news →</a></p>
+      </div>
+    )}
+    <div class="container narrow">
       <div class="callout" style="margin-top:48px">
         <div>
           <h3>Stay informed</h3>
@@ -24,7 +43,7 @@ const others = ISSUES.filter((i) => i.title !== title);
         </div>
         <a class="btn" href="/get-involved/">Join CIC</a>
       </div>
-      <h3>Other issues</h3>
+      <h3 style="margin-top:32px">Other issues</h3>
       <ul class="tags">
         {others.map((o) => <li><a class="tag" href={`/issues/${o.slug}/`}>{o.title}</a></li>)}
       </ul>
