@@ -7,10 +7,10 @@ export const SITE = {
   phone: '[CONTACT PHONE]',
   mail: '[MAILING ADDRESS]',
   social: [] as { label: string; href: string }[], // [SOCIAL LINKS]
-  // Google Apps Script web app URL that writes form submissions to the CIC Google Sheet
-  // (docs/forms-setup.md). Set PUBLIC_FORM_ENDPOINT in Vercel, or paste the URL in place of ''.
-  // Empty = preview mode: forms show the thank-you message but send nothing.
-  formHandler: (import.meta.env.PUBLIC_FORM_ENDPOINT as string | undefined) || '',
+  // Google Apps Script web app that writes form submissions to the CIC Google Sheet
+  // (docs/forms-setup.md). PUBLIC_FORM_ENDPOINT in Vercel overrides it.
+  formHandler: (import.meta.env.PUBLIC_FORM_ENDPOINT as string | undefined) ||
+    'https://script.google.com/macros/s/AKfycbx4NCbWMVwUaqocscKluJfL7McfHcN2g1CtmgHu7Y_rhaq59OZJqPejgkdEL3Q0bzvR/exec',
   privacyPolicy: '[PRIVACY POLICY LINK]',
   dues: '[DUES OR FEE INFO]',
   newsletterFrequency: '[NEWSLETTER FREQUENCY]',
