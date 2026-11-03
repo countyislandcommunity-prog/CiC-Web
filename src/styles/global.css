@@ -241,8 +241,35 @@ fieldset { border: 1px solid var(--line); border-radius: 10px; padding: 12px 16p
 /* Footer */
 .site-footer { background: var(--ink); color: #EADBCB; padding: 48px 0 32px; }
 .site-footer a { color: #F4E3D2; }
-.site-footer .cols { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 32px; }
-@media (max-width: 760px) { .site-footer .cols { grid-template-columns: 1fr; } }
+.site-footer .cols { display: grid; grid-template-columns: 1.4fr 1fr 1fr auto; gap: 32px; }
+@media (max-width: 860px) { .site-footer .cols { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 560px) { .site-footer .cols { grid-template-columns: 1fr; } }
+.footer-qr { text-align: center; }
+.footer-qr img { width: 120px; height: 120px; background: #fff; padding: 8px; border-radius: 10px; margin: 0 auto 8px; }
+.footer-qr p { margin: 0; line-height: 1.5; }
+@media (max-width: 560px) { .footer-qr { text-align: left; } .footer-qr img { margin-left: 0; } }
+
+/* Alert bar */
+.alert-bar { background: #E9B44C; color: var(--ink); border-bottom: 1px solid rgba(59,42,34,.15); }
+.alert-bar .container { display: flex; align-items: center; gap: 12px; min-height: 48px; padding-top: 8px; padding-bottom: 8px; }
+.alert-bar p { margin: 0; flex: 1; font-size: 1rem; font-weight: 600; line-height: 1.4; }
+.alert-bar a { color: var(--ink); font-weight: 700; margin-left: 6px; white-space: nowrap; }
+.alert-bar a:hover { color: var(--terracotta-dark); }
+.alert-label {
+  flex: none; background: var(--ink); color: #FBE7B8; font-size: .75rem; font-weight: 700;
+  letter-spacing: .08em; text-transform: uppercase; padding: 3px 10px; border-radius: 999px;
+}
+.alert-close {
+  flex: none; background: none; border: 0; color: var(--ink); font-size: 1.6rem; line-height: 1;
+  width: 36px; height: 36px; border-radius: 50%; cursor: pointer;
+}
+.alert-close:hover { background: rgba(59,42,34,.1); }
+.alert-short { display: none; }
+@media (max-width: 620px) {
+  .alert-long { display: none; }
+  .alert-short { display: inline; }
+  .alert-label { display: none; }
+}
 .site-footer h4 { font-family: var(--font-head); color: #fff; font-size: 1.1rem; margin: 0 0 12px; }
 .site-footer ul { list-style: none; padding: 0; margin: 0; }
 .site-footer .ph { background: rgba(255,240,179,.18); color: #FFE9A8; }

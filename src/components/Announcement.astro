@@ -1,0 +1,37 @@
+---
+import { ANNOUNCEMENT } from '../site';
+
+const { text, short, linkText, href, until } = ANNOUNCEMENT;
+// Ends at midnight Arizona time (UTC-7, no daylight saving) after `until`.
+const endsAt = until ? Date.parse(`${until}T23:59:59-07:00`) : 0;
+const show = text && (!endsAt || Date.now() < endsAt);
+const key = `cic-alert:${text}`;
+---
+{show && (
+  <div class="alert-bar" role="region" aria-label="Announcement" data-key={key} data-ends={endsAt}>
+    <div class="container">
+      <span class="alert-label">Event</span>
+      <p>
+        <span class="alert-long">{text}</span>
+        <span class="alert-short">{short || text}</span>
+        {href && <a href={href}>{linkText}</a>}
+      </p>
+      <button type="button" class="alert-close" aria-label="Close announcement">×</button>
+    </div>
+  </div>
+)}
+
+<script>
+  const bar = document.querySelector<HTMLElement>('.alert-bar');
+  if (bar) {
+    const key = bar.dataset.key!;
+    const ends = Number(bar.dataset.ends);
+    let dismissed = false;
+    try { dismissed = localStorage.getItem(key) === '1'; } catch {}
+    if (dismissed || (ends && Date.now() > ends)) bar.remove();
+    bar.querySelector('.alert-close')?.addEventListener('click', () => {
+      try { localStorage.setItem(key, '1'); } catch {}
+      bar.remove();
+    });
+  }
+</script>

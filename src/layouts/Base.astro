@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import { SITE, NAV } from '../site';
 import Ph from '../components/Ph.astro';
+import Announcement from '../components/Announcement.astro';
 
 interface Props { title?: string; description?: string }
 const { title, description = 'Neighbors in the 13 unincorporated county islands of the Peoria MPA, Arizona, looking out for each other.' } = Astro.props;
@@ -28,6 +29,7 @@ const year = new Date().getFullYear();
   </head>
   <body>
     <a class="skip" href="#main">Skip to content</a>
+    <Announcement />
     <header class="site-header">
       <div class="container">
         <a class="brand" href="/">
@@ -71,6 +73,10 @@ const year = new Date().getFullYear();
               <li>Mail: <Ph v={SITE.mail} /></li>
               <li><a href="/contact/">Contact form</a></li>
             </ul>
+          </div>
+          <div class="footer-qr">
+            <img src="/images/qr-countyislandcommunity.svg" alt="QR code linking to countyislandcommunity.com" width="120" height="120" />
+            <p class="small">Scan to share this site<br /><a href="/images/qr-countyislandcommunity.png" download>Download QR code</a></p>
           </div>
         </div>
         <div class="bottom">

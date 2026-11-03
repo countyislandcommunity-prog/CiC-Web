@@ -31,6 +31,16 @@ export const NAV = [
   { label: 'Contact', href: '/contact/' },
 ];
 
+// Alert bar above the header. It hides itself after `until` (end of that day, Arizona time),
+// and visitors can close it. Set `text: ''` to turn it off.
+export const ANNOUNCEMENT = {
+  text: "Join us Saturday, Nov. 7 at the farmers market across from Campbell's restaurant to talk about the issues affecting the county islands.",
+  short: "Join us Sat., Nov. 7 at the farmers market across from Campbell's.",
+  linkText: 'Learn more',
+  href: '/get-involved/',
+  until: '2026-11-07',
+};
+
 // tag: the news tag whose posts are listed on the issue page.
 export const ISSUES = [
   { slug: 'health-safety', title: 'Health & Safety', tag: 'Health & Safety', blurb: 'Reliable fire and EMS coverage for every home.' },
