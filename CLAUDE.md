@@ -1,6 +1,16 @@
 # County Island Community website
 
-Community site for countyislandcommunity.com. Several people edit it through Claude Code, all signed in to the same GitHub account.
+Community site for countyislandcommunity.com. Several people edit it through Claude Code, all signed in to the same GitHub account. The people using this are not developers: do the technical steps for them, explain in plain language, and only ask them to do things only they can do (sign in, click Install).
+
+## First-time setup (when someone new is getting started)
+
+1. Make sure Git is installed (`git --version`). If it's missing, walk them through installing it (git-scm.com on Windows; on a Mac, running `git` prompts to install it), then continue.
+2. If this repo isn't on their computer yet, clone `https://github.com/countyislandcommunity-prog/CiC-Web` into a `CiC-Web` folder on their Desktop.
+3. Do "Know who's editing" below.
+4. Tell them: next time, open the **CiC-Web** folder on their Desktop in Claude Code, then just describe the change they want.
+5. The first push will open a browser window to sign in to GitHub. Tell them to sign in with the shared CIC account (it uses the countyislandcommunity@gmail.com Google sign-in).
+
+Node.js is only needed to preview changes before they go live. Don't install it unless they ask to preview.
 
 ## At the start of each session
 
@@ -12,4 +22,5 @@ Community site for countyislandcommunity.com. Several people edit it through Cla
 ## Making changes
 
 - Pushing to `main` puts the change live on the website within about a minute (Vercel). Commit with a plain-English message saying what changed, then push.
+- After pushing, give them the page link to check, e.g. https://www.countyislandcommunity.com/.
 - The README explains where things live (site settings, news posts, forms).

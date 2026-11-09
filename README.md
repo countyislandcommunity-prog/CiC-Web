@@ -2,6 +2,14 @@
 
 Static site for [countyislandcommunity.com](https://countyislandcommunity.com), built with [Astro](https://astro.build). Content comes from `cic_website_content.md`.
 
+## New editor? Start here
+
+Open Claude Code and paste this message:
+
+> Set me up to edit the County Island Community website. Download https://github.com/countyislandcommunity-prog/CiC-Web to a CiC-Web folder on my Desktop (install Git first if I don't have it), then read the CLAUDE.md file in that folder and follow its first-time setup steps. Walk me through anything I need to do myself.
+
+Claude handles the rest and tells you what to do next time. After setup, open the **CiC-Web** folder in Claude Code and describe the change you want, for example "change the next meeting date to December 3" or "add this article to the news." Changes go live on the site within about a minute.
+
 ## Run locally
 
 ```bash
